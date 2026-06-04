@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Faseeh Dental Clinic — expert dental care in Karachi. Same-day appointments. Book on WhatsApp.">
+  <title>Faseeh Dental Clinic | Karachi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            teal: { DEFAULT: '#0D9488', dark: '#0F766E', light: '#14B8A6' }
+          },
+          fontFamily: { sans: ['Poppins', 'system-ui', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .placeholder-img {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #e2e8f0;
+      color: #64748b;
+      font-weight: 500;
+      font-size: 0.875rem;
+      text-align: center;
+      padding: 1rem;
+      border: 2px dashed #cbd5e1;
+    }
+    .slide {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .slide.active { opacity: 1; }
+    .carousel-scroll::-webkit-scrollbar { height: 6px; }
+    .carousel-scroll::-webkit-scrollbar-thumb { background: #0D9488; border-radius: 3px; }
+    .tab-btn.active {
+      background-color: #0D9488;
+      color: #fff;
+      border-color: #0D9488;
+    }
+    .ba-panel { display: none; }
+    .ba-panel.active { display: block; }
+    .ba-carousel .ba-slide {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+    }
+    .ba-carousel .ba-slide.active {
+      opacity: 1;
+      position: relative;
+    }
+    #mobile-menu.open { transform: translateX(0); }
+    #mobile-menu { transform: translateX(100%); }
+    @media (min-width: 768px) {
+      #fab-whatsapp { display: none !important; }
+    }
+  </style>
+</head>
+<body class="font-sans text-slate-800 antialiased">
+
+  <!-- SECTION 1: STICKY NAVBAR -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white shadow-md transition-shadow">
+    <nav class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      <a href="#home" class="shrink-0 flex items-center gap-2" aria-label="Faseeh Dental Clinic home">
+        <img src="images/fdc-logo.png" alt="Faseeh Dental Clinic" class="h-10 w-auto">
+        <span class="hidden sm:inline font-semibold text-teal text-sm leading-tight">Faseeh Dental Clinic</span>
+      </a>
+
+      <ul class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
+        <li><a href="#home" class="hover:text-teal transition-colors">Home</a></li>
+        <li><a href="#before-after" class="hover:text-teal transition-colors">Before &amp; After</a></li>
+        <li><a href="#about" class="hover:text-teal transition-colors">About</a></li>
+        <li><a href="#reviews" class="hover:text-teal transition-colors">Reviews</a></li>
+        <li><a href="#services" class="hover:text-teal transition-colors">Services</a></li>
+        <li><a href="#contact" class="hover:text-teal transition-colors">Contact</a></li>
+      </ul>
+
+      <a href="https://wa.me/923211507943" target="_blank" rel="noopener noreferrer"
+         class="hidden md:inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-white text-sm font-semibold px-4 py-2 rounded-full shadow-sm transition-colors shrink-0">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Book on WhatsApp
+      </a>
+
+      <button type="button" id="menu-toggle" class="lg:hidden p-2 rounded-lg hover:bg-slate-100" aria-label="Open menu" aria-expanded="false">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Mobile menu overlay -->
+  <div id="menu-backdrop" class="fixed inset-0 bg-black/40 z-50 hidden lg:hidden" aria-hidden="true"></div>
+  <aside id="mobile-menu" class="fixed top-0 right-0 h-full w-72 max-w-[85vw] bg-white z-50 shadow-xl transition-transform duration-300 lg:hidden flex flex-col pt-20 px-6 gap-4">
+    <button type="button" id="menu-close" class="absolute top-4 right-4 p-2 rounded-lg hover:bg-slate-100" aria-label="Close menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <a href="#home" class="mobile-nav-link py-2 text-lg font-medium hover:text-teal">Home</a>
+    <a href="#before-after" class="mobile-nav-link py-2 text-lg font-medium hover:text-teal">Before &amp; After</a>
+    <a href="#about" class="mobile-nav-link py-2 text-lg font-medium hover:text-teal">About</a>
+    <a href="#reviews" class="mobile-nav-link py-2 text-lg font-medium hover:text-teal">Reviews</a>
+    <a href="#services" class="mobile-nav-link py-2 text-lg font-medium hover:text-teal">Services</a>
+    <a href="#contact" class="mobile-nav-link py-2 text-lg font-medium hover:text-teal">Contact</a>
+    <a href="https://wa.me/923211507943" target="_blank" rel="noopener noreferrer"
+       class="mt-4 inline-flex justify-center items-center gap-2 bg-[#25D366] text-white font-semibold px-5 py-3 rounded-full">
+      Book on WhatsApp
+    </a>
+  </aside>
+
+  <!-- Floating WhatsApp (mobile only) -->
+  <a id="fab-whatsapp" href="https://wa.me/923211507943" target="_blank" rel="noopener noreferrer"
+     class="fixed bottom-5 right-5 z-40 w-14 h-14 bg-[#25D366] hover:bg-[#20BD5A] text-white rounded-full shadow-lg flex items-center justify-center md:hidden"
+     aria-label="Book on WhatsApp">
+    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <main>
+    <!-- SECTION 2: HERO SLIDESHOW -->
+    <section id="home" class="relative h-screen min-h-[500px] pt-16 overflow-hidden">
+      <div id="hero-slideshow" class="absolute inset-0">
+        <div class="slide active absolute inset-0"><img src="images/clinic1.jpeg" class="w-full h-full object-cover object-center absolute inset-0" alt=""></div>
+        <div class="slide absolute inset-0"><img src="images/clinic2.jpeg" class="w-full h-full object-cover object-[center_40%] absolute inset-0" alt=""></div>
+        <div class="slide absolute inset-0"><img src="images/clinic3.jpeg" class="w-full h-full object-cover object-[center_35%] absolute inset-0" alt=""></div>
+        <div class="slide absolute inset-0"><img src="images/clinic4.jpeg" class="w-full h-full object-cover object-[center_30%] absolute inset-0" alt=""></div>
+        <div class="slide absolute inset-0"><img src="images/clinic5.jpeg" class="w-full h-full object-cover object-[center_30%] absolute inset-0" alt=""></div>
+      </div>
+      <div class="absolute inset-0 bg-black/40 pointer-events-none" aria-hidden="true"></div>
+      <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-4 text-white">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold max-w-3xl leading-tight drop-shadow-lg">
+          Where Comfort Meets Expert Dental Care
+        </h1>
+        <p class="mt-4 text-base sm:text-lg md:text-xl max-w-xl text-white/95 drop-shadow">
+          Karachi's most trusted dental clinic — same day appointments available
+        </p>
+        <a href="https://wa.me/923211507943" target="_blank" rel="noopener noreferrer"
+           class="mt-8 inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#20BD5A] text-white text-lg font-semibold px-8 py-4 rounded-full shadow-lg transition-colors">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Book on WhatsApp
+        </a>
+      </div>
+      <div id="hero-dots" class="absolute bottom-8 left-0 right-0 z-20 flex justify-center gap-2" role="tablist" aria-label="Slideshow"></div>
+    </section>
+
+    <!-- SECTION 3: BEFORE & AFTER -->
+    <section id="before-after" class="py-16 md:py-20 bg-slate-50">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center text-slate-900">Real Results, Real Patients</h2>
+        <div class="mt-8 flex flex-wrap justify-center gap-2" role="tablist" aria-label="Treatment categories">
+          <button type="button" class="tab-btn active text-xs sm:text-sm font-medium px-3 py-2 rounded-full border border-slate-300 text-slate-600 hover:border-teal transition-colors" data-tab="fillings">Fillings</button>
+          <button type="button" class="tab-btn text-xs sm:text-sm font-medium px-3 py-2 rounded-full border border-slate-300 text-slate-600 hover:border-teal transition-colors" data-tab="crowns">Crowns</button>
+          <button type="button" class="tab-btn text-xs sm:text-sm font-medium px-3 py-2 rounded-full border border-slate-300 text-slate-600 hover:border-teal transition-colors" data-tab="dentures">Dentures</button>
+          <button type="button" class="tab-btn text-xs sm:text-sm font-medium px-3 py-2 rounded-full border border-slate-300 text-slate-600 hover:border-teal transition-colors" data-tab="diastema">Diastema Closure</button>
+          <button type="button" class="tab-btn text-xs sm:text-sm font-medium px-3 py-2 rounded-full border border-slate-300 text-slate-600 hover:border-teal transition-colors" data-tab="whitening">Whitening</button>
+          <button type="button" class="tab-btn text-xs sm:text-sm font-medium px-3 py-2 rounded-full border border-slate-300 text-slate-600 hover:border-teal transition-colors" data-tab="bridge">Bridge</button>
+          <button type="button" class="tab-btn text-xs sm:text-sm font-medium px-3 py-2 rounded-full border border-slate-300 text-slate-600 hover:border-teal transition-colors" data-tab="scaling">Scaling</button>
+        </div>
+
+        <!-- Fillings -->
+        <div class="ba-panel active mt-10" data-panel="fillings">
+          <div class="ba-carousel mx-auto max-w-[500px] w-full">
+            <div class="ba-carousel-track relative w-full">
+              <div class="ba-slide active">
+                <img src="images/fillings.JPG" alt="Dental fillings before and after" class="max-w-[500px] w-full mx-auto rounded-2xl shadow-lg object-contain">
+              </div>
+              <div class="ba-slide">
+                <img src="images/fillings2.JPG" alt="Dental fillings before and after" class="max-w-[500px] w-full mx-auto rounded-2xl shadow-lg object-contain">
+              </div>
+            </div>
+            <div class="ba-carousel-dots flex justify-center gap-2 mt-4" role="tablist" aria-label="Fillings gallery"></div>
+          </div>
+        </div>
+
+        <!-- Crowns -->
+        <div class="ba-panel mt-10" data-panel="crowns">
+          <img src="images/crown.JPG" alt="Dental crown before and after" class="max-w-[500px] w-full mx-auto rounded-2xl shadow-lg object-contain">
+        </div>
+
+        <!-- Dentures -->
+        <div class="ba-panel mt-10" data-panel="dentures">
+          <img src="images/denture.JPG" alt="Dentures before and after" class="max-w-[500px] w-full mx-auto rounded-2xl shadow-lg object-contain">
+        </div>
+
+        <!-- Diastema Closure -->
+        <div class="ba-panel mt-10" data-panel="diastema">
+          <div class="ba-carousel mx-auto max-w-[500px] w-full">
+            <div class="ba-carousel-track relative w-full">
+              <div class="ba-slide active">
+                <img src="images/diastema.JPG" alt="Diastema closure before and after" class="max-w-[500px] w-full mx-auto rounded-2xl shadow-lg object-contain">
+              </div>
+              <div class="ba-slide">
+                <img src="images/diastema2.JPG" alt="Diastema closure before and after" class="max-w-[500px] w-full mx-auto rounded-2xl shadow-lg object-contain">
+              </div>
+            </div>
+            <div class="ba-carousel-dots flex justify-center gap-2 mt-4" role="tablist" aria-label="Diastema closure gallery"></div>
+          </div>
+        </div>
+
+        <!-- Whitening -->
+        <div class="ba-panel mt-10" data-panel="whitening">
+          <img src="images/whitening.JPG" alt="Teeth whitening before and after" class="max-w-[500px] w-full mx-auto rounded-2xl shadow-lg object-contain">
+        </div>
+
+        <!-- Bridge -->
+        <div class="ba-panel mt-10" data-panel="bridge">
+          <img src="images/bridge.JPG" alt="Dental bridge before and after" class="max-w-[500px] w-full mx-auto rounded-2xl shadow-lg object-contain">
+        </div>
+
+        <!-- Scaling -->
+        <div class="ba-panel mt-10" data-panel="scaling">
+          <img src="images/scaling.jpeg" alt="Dental scaling before and after" class="max-w-[500px] w-full mx-auto rounded-2xl shadow-lg object-contain">
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: ABOUT -->
+    <section id="about" class="py-16 md:py-20">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="flex flex-col md:flex-row gap-10 items-center md:items-start">
+          <div class="w-full md:w-2/5 shrink-0">
+            <div class="aspect-[4/5] max-w-sm mx-auto md:mx-0 rounded-2xl shadow-lg overflow-hidden">
+              <img src="images/faseeh.jpeg" alt="Dr. Faseeh Ur Rehman" class="w-full h-full object-cover rounded-2xl">
+            </div>
+          </div>
+          <div class="w-full md:w-3/5 text-center md:text-left">
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Dr. Faseeh Ur Rehman</h2>
+            <p class="mt-2 text-teal font-semibold">BDS — Dentist &amp; Founder, Faseeh Dental Clinic</p>
+            <p class="mt-6 text-slate-600 leading-relaxed">
+              Dr. Faseeh brings years of experience in general and cosmetic dentistry, combining gentle care with advanced techniques to give every patient a smile they love.
+            </p>
+            <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <div class="text-center md:text-left">
+                <p class="text-3xl sm:text-4xl font-bold text-teal">100+</p>
+                <p class="text-sm text-slate-600 mt-1">Happy Patients</p>
+              </div>
+              <div class="text-center md:text-left">
+                <p class="text-3xl sm:text-4xl font-bold text-teal">4+</p>
+                <p class="text-sm text-slate-600 mt-1">Years Experience</p>
+              </div>
+              <div class="text-center md:text-left">
+                <p class="text-3xl sm:text-4xl font-bold text-teal">500+</p>
+                <p class="text-sm text-slate-600 mt-1">Treatments</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: VIDEO REVIEWS -->
+    <section id="reviews" class="py-16 md:py-20 bg-slate-50">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center text-slate-900">What Our Patients Say</h2>
+        <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <article class="text-center">
+            <button type="button" class="video-thumb group relative w-full aspect-video rounded-2xl overflow-hidden shadow-md focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2" aria-label="Play review from Ahmed">
+              <div class="placeholder-img w-full h-full text-base border-0 rounded-none">[VIDEO_1]</div>
+              <span class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
+                <span class="w-14 h-14 rounded-full bg-white/95 flex items-center justify-center shadow-lg">
+                  <svg class="w-6 h-6 text-teal ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </span>
+              </span>
+            </button>
+            <p class="mt-3 font-medium text-slate-800">Ahmed — Dental Implants</p>
+          </article>
+          <article class="text-center">
+            <button type="button" class="video-thumb group relative w-full aspect-video rounded-2xl overflow-hidden shadow-md focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2" aria-label="Play review from Sara">
+              <div class="placeholder-img w-full h-full text-base border-0 rounded-none">[VIDEO_2]</div>
+              <span class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
+                <span class="w-14 h-14 rounded-full bg-white/95 flex items-center justify-center shadow-lg">
+                  <svg class="w-6 h-6 text-teal ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </span>
+              </span>
+            </button>
+            <p class="mt-3 font-medium text-slate-800">Sara — Teeth Whitening</p>
+          </article>
+          <article class="text-center">
+            <button type="button" class="video-thumb group relative w-full aspect-video rounded-2xl overflow-hidden shadow-md focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2" aria-label="Play review from Hassan">
+              <div class="placeholder-img w-full h-full text-base border-0 rounded-none">[VIDEO_3]</div>
+              <span class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
+                <span class="w-14 h-14 rounded-full bg-white/95 flex items-center justify-center shadow-lg">
+                  <svg class="w-6 h-6 text-teal ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </span>
+              </span>
+            </button>
+            <p class="mt-3 font-medium text-slate-800">Hassan — Cosmetic Dentistry</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: SERVICES -->
+    <section id="services" class="py-16 md:py-20">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center text-slate-900">Our Services</h2>
+        <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <article class="group p-6 rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md hover:border-teal/40 transition-all">
+            <span class="text-3xl" aria-hidden="true">🦷</span>
+            <h3 class="mt-4 font-semibold text-lg text-slate-900 group-hover:text-teal transition-colors">Dental Implants</h3>
+            <p class="mt-2 text-sm text-slate-600">Permanent, natural-looking tooth replacement</p>
+            <a href="https://wa.me/923211507943?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20Dental%20Implants" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block text-sm font-semibold text-teal hover:underline">Learn More →</a>
+          </article>
+          <article class="group p-6 rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md hover:border-teal/40 transition-all">
+            <span class="text-3xl" aria-hidden="true">✨</span>
+            <h3 class="mt-4 font-semibold text-lg text-slate-900 group-hover:text-teal transition-colors">Teeth Whitening</h3>
+            <p class="mt-2 text-sm text-slate-600">Professional whitening for a brighter smile</p>
+            <a href="https://wa.me/923211507943?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20Teeth%20Whitening" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block text-sm font-semibold text-teal hover:underline">Learn More →</a>
+          </article>
+          <article class="group p-6 rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md hover:border-teal/40 transition-all">
+            <span class="text-3xl" aria-hidden="true">💎</span>
+            <h3 class="mt-4 font-semibold text-lg text-slate-900 group-hover:text-teal transition-colors">Cosmetic Dentistry</h3>
+            <p class="mt-2 text-sm text-slate-600">Veneers, bonding, and smile makeovers</p>
+            <a href="https://wa.me/923211507943?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20Cosmetic%20Dentistry" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block text-sm font-semibold text-teal hover:underline">Learn More →</a>
+          </article>
+          <article class="group p-6 rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md hover:border-teal/40 transition-all">
+            <span class="text-3xl" aria-hidden="true">👶</span>
+            <h3 class="mt-4 font-semibold text-lg text-slate-900 group-hover:text-teal transition-colors">Pediatric Dentistry</h3>
+            <p class="mt-2 text-sm text-slate-600">Gentle, friendly care for children</p>
+            <a href="https://wa.me/923211507943?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20Pediatric%20Dentistry" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block text-sm font-semibold text-teal hover:underline">Learn More →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- SECTION 7: FOOTER -->
+  <footer id="contact" class="bg-slate-900 text-slate-300 py-12 md:py-16">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <h2 class="text-xl font-bold text-white">Faseeh Dental Clinic</h2>
+      <p class="mt-2 text-sm text-slate-400">Where comfort meets expert dental care — Karachi</p>
+      <p class="mt-6 text-sm">
+        <span class="text-slate-500">Address:</span>
+        <span class="block mt-1 font-medium text-white">L-11 Shop, Street Number 2, Block 17, Gulshan-e-Iqbal, Karachi 75300</span>
+      </p>
+      <p class="mt-4 text-sm">
+        <span class="text-slate-500">Hours:</span>
+        <span class="block mt-1 font-medium text-white">Mon–Sat, 1:00pm – 9:00pm</span>
+      </p>
+      <p class="mt-4">
+        <a href="tel:+923211507943" class="hover:text-teal-light transition-colors font-medium text-white">0321-1507943</a>
+      </p>
+      <a href="https://wa.me/923211507943" target="_blank" rel="noopener noreferrer"
+         class="mt-6 inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-white font-semibold px-6 py-3 rounded-full transition-colors">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Book on WhatsApp
+      </a>
+      <p class="mt-10 text-xs text-slate-500">© 2026 Faseeh Dental Clinic. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const WA = 'https://wa.me/923211507943';
+
+      // Hero slideshow
+      const slides = document.querySelectorAll('#hero-slideshow .slide');
+      const dotsContainer = document.getElementById('hero-dots');
+      let current = 0;
+      let timer;
+
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'w-2.5 h-2.5 rounded-full transition-colors ' + (i === 0 ? 'bg-white' : 'bg-white/50');
+        dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        dot.addEventListener('click', () => goTo(i, true));
+        dotsContainer.appendChild(dot);
+      });
+      const dots = dotsContainer.querySelectorAll('button');
+
+      function goTo(index, resetTimer) {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('bg-white');
+        dots[current].classList.add('bg-white/50');
+        current = (index + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        dots[current].classList.add('bg-white');
+        dots[current].classList.remove('bg-white/50');
+        if (resetTimer) startTimer();
+      }
+
+      function startTimer() {
+        clearInterval(timer);
+        timer = setInterval(() => goTo(current + 1, false), 4000);
+      }
+      startTimer();
+
+      // Before/after image carousels (Fillings & Diastema)
+      document.querySelectorAll('.ba-carousel').forEach(carousel => {
+        const slides = carousel.querySelectorAll('.ba-slide');
+        const dotsContainer = carousel.querySelector('.ba-carousel-dots');
+        let current = 0;
+        let timer;
+
+        slides.forEach((_, i) => {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'w-2 h-2 rounded-full transition-colors ' + (i === 0 ? 'bg-teal' : 'bg-slate-300');
+          dot.setAttribute('aria-label', 'Go to image ' + (i + 1));
+          dot.addEventListener('click', () => goTo(i, true));
+          dotsContainer.appendChild(dot);
+        });
+        const dots = dotsContainer.querySelectorAll('button');
+
+        function goTo(index, resetTimer) {
+          slides[current].classList.remove('active');
+          dots[current].classList.remove('bg-teal');
+          dots[current].classList.add('bg-slate-300');
+          current = (index + slides.length) % slides.length;
+          slides[current].classList.add('active');
+          dots[current].classList.add('bg-teal');
+          dots[current].classList.remove('bg-slate-300');
+          if (resetTimer) startTimer();
+        }
+
+        function startTimer() {
+          clearInterval(timer);
+          timer = setInterval(() => goTo(current + 1, false), 3000);
+        }
+        startTimer();
+      });
+
+      // Before/after tabs
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const tab = btn.dataset.tab;
+          document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+          document.querySelectorAll('.ba-panel').forEach(p => p.classList.remove('active'));
+          btn.classList.add('active');
+          document.querySelector('[data-panel="' + tab + '"]').classList.add('active');
+        });
+      });
+
+      // Mobile menu
+      const menu = document.getElementById('mobile-menu');
+      const backdrop = document.getElementById('menu-backdrop');
+      const toggle = document.getElementById('menu-toggle');
+      const closeBtn = document.getElementById('menu-close');
+
+      function openMenu() {
+        menu.classList.add('open');
+        backdrop.classList.remove('hidden');
+        toggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeMenu() {
+        menu.classList.remove('open');
+        backdrop.classList.add('hidden');
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+
+      toggle.addEventListener('click', openMenu);
+      closeBtn.addEventListener('click', closeMenu);
+      backdrop.addEventListener('click', closeMenu);
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      // Video placeholders — swap div for iframe when you have URLs
+      document.querySelectorAll('.video-thumb').forEach(btn => {
+        btn.addEventListener('click', () => {
+          alert('Replace [VIDEO_*] placeholders with your embed URL or thumbnail link.');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
