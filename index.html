@@ -67,6 +67,50 @@
       #fab-whatsapp { display: none !important; }
     }
   </style>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18059562548"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18059562548');
+</script>
+
+<!-- Conversion tracking functions -->
+<script>
+  function gtagReportLeadForm(url) {
+    var callback = function () {
+      if (typeof(url) != 'undefined') { window.location = url; }
+    };
+    gtag('event', 'conversion', {
+        'send_to': 'AW-18059562548/FGeSCPiOypccELScvKND',
+        'event_callback': callback
+    });
+    return false;
+  }
+
+  function gtagReportWhatsApp(url) {
+    var callback = function () {
+      if (typeof(url) != 'undefined') { window.location = url; }
+    };
+    gtag('event', 'conversion', {
+        'send_to': 'AW-18059562548/yWCpCNeQoZgcELScvKND',
+        'event_callback': callback
+    });
+    return false;
+  }
+
+  function gtagReportCall(url) {
+    var callback = function () {
+      if (typeof(url) != 'undefined') { window.location = url; }
+    };
+    gtag('event', 'conversion', {
+        'send_to': 'AW-18059562548/3032CM7s4ZccELScvKND',
+        'event_callback': callback
+    });
+    return false;
+  }
+</script>
 </head>
 <body class="font-sans text-slate-800 antialiased">
 
@@ -111,7 +155,7 @@
     <a href="#reviews" class="mobile-nav-link py-2 text-lg font-medium hover:text-teal">Reviews</a>
     <a href="#services" class="mobile-nav-link py-2 text-lg font-medium hover:text-teal">Services</a>
     <a href="#contact" class="mobile-nav-link py-2 text-lg font-medium hover:text-teal">Contact</a>
-    <a href="https://wa.me/923211507943" target="_blank" rel="noopener noreferrer"
+    <a href="https://wa.me/923211507943" target="_blank" rel="noopener noreferrer" onclick="gtagReportWhatsApp();"
        class="mt-4 inline-flex justify-center items-center gap-2 bg-[#25D366] text-white font-semibold px-5 py-3 rounded-full">
       Book on WhatsApp
     </a>
@@ -315,7 +359,7 @@
         <span class="block mt-1 font-medium text-white">Mon–Sat, 1:00pm – 9:00pm</span>
       </p>
       <p class="mt-4">
-        <a href="tel:+923211507943" class="hover:text-teal-light transition-colors font-medium text-white">0321-1507943</a>
+        <a href="tel:+923211507943" class="hover:text-teal-light transition-colors font-medium text-white" onclick="gtagReportCall();">0321-1507943</a>
       </p>
       <a href="https://wa.me/923211507943" target="_blank" rel="noopener noreferrer"
          class="mt-6 inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-white font-semibold px-6 py-3 rounded-full transition-colors">
